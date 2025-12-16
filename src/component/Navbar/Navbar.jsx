@@ -68,7 +68,7 @@ const Navbar = () => {
         </div>
         <Link to="/" className="flex items-center">
           <img className="w-12" src={logo} alt="" />
-          <h2 className="font-bold text-xl text-red-600">
+          <h2 className="font-bold text-xl text-red-600 md:block hidden">
             Blood<span className="text-red-900">Bank</span>
           </h2>
         </Link>
