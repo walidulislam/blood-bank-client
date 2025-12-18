@@ -2,10 +2,19 @@ import React, { use } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { Link, NavLink } from "react-router";
 import logo from "/blood.png";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
-  const { user, loading } = use(AuthContext);
-
+  const { user, logOutUser, loading } = use(AuthContext);
+  const handelLogOut = () => {
+    logOutUser()
+      .then(() => {
+        toast.success("LogOut Successful..➜]");
+      })
+      .catch((e) => {
+        toast.error(e.message);
+      });
+  };
   return (
     <div className="navbar bg-red-50 rounded-2xl shadow-lg px-4 md:px-10 lg:px-20">
       <div className="navbar-start">
@@ -249,7 +258,7 @@ const Navbar = () => {
               >
                 Dashboard
               </NavLink>
-              <button className="button">
+              <button onClick={handelLogOut} className="button">
                 <span className="text">Logout</span>
               </button>
             </ul>
@@ -259,7 +268,7 @@ const Navbar = () => {
             <Link to="/login" className="button">
               <span className="text">Login</span>
             </Link>
-            <Link to="/signup" className="button">
+            <Link to="/register" className="button">
               <span className="text">Signup</span>
             </Link>
           </div>

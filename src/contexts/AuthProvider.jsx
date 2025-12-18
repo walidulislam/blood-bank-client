@@ -8,10 +8,12 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
+import axios from "axios";
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [role, setRole] = useState("");
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -43,6 +45,14 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (!user) return;
+    axios.get(`http://localhost:3000/users/role/${user.email}`).then((res) => {
+      setRole(res.data.role);
+      setLoading(false);
+    });
+  }, [user]);
+
   const authInfo = {
     user,
     setUser,
@@ -52,6 +62,7 @@ const AuthProvider = ({ children }) => {
     logInUser,
     logOutUser,
     updateProfileUser,
+    role,
   };
   return <AuthContext value={authInfo}>{children}</AuthContext>;
 };
