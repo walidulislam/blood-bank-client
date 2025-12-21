@@ -7,6 +7,7 @@ import DashboardLayout from "../DashboardLayout/DashboardLayout";
 import MainDashboard from "../pages/Dashboard/MainDashboard/MainDashboard";
 import PrivateRoutes from "./PrivateRoutes";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
+import CreateRequest from "../pages/Dashboard/CreateRequest/CreateRequest";
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ export const router = createBrowserRouter([
       {
         path: "all-users",
         Component: AllUsers,
+      },
+      {
+        path: "create-donation-request",
+        Component: CreateRequest,
       },
     ],
   },
