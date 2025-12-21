@@ -6,6 +6,7 @@ import Register from "../pages/Register/Register";
 import DashboardLayout from "../DashboardLayout/DashboardLayout";
 import MainDashboard from "../pages/Dashboard/MainDashboard/MainDashboard";
 import PrivateRoutes from "./PrivateRoutes";
+import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 
 export const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <MainDashboard></MainDashboard>,
+      },
+      {
+        path: "all-users",
+        Component: AllUsers,
       },
     ],
   },
