@@ -13,6 +13,7 @@ import UpdateRequest from "../pages/Dashboard/UpdateRequest/UpdateRequest";
 import Profile from "../pages/Dashboard/Profile/Profile";
 import Search from "../pages/Dashboard/Search/Search";
 import DonationRequests from "../pages/DonationRequests/DonationRequests";
+import DonationDetails from "../pages/DonationDetails/DonationDetails";
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +39,14 @@ export const router = createBrowserRouter([
       {
         path: "/donation-requests",
         Component: DonationRequests,
+      },
+      {
+        path: "/donation-details/:id",
+        element: (
+          <PrivateRoutes>
+            <DonationDetails />
+          </PrivateRoutes>
+        ),
       },
     ],
   },
