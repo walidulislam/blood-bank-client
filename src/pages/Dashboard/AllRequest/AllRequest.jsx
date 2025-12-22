@@ -1,23 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FaEdit, FaTrash, FaEye, FaCheck, FaTimes } from "react-icons/fa";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
-const MyRequest = () => {
+import { AuthContext } from "../../../contexts/AuthContext";
+
+const AllRequest = () => {
   const [totalRequest, setTotalRequest] = useState(0);
-  const [myRequests, setMyRequests] = useState([]);
+  const [requests, setRequests] = useState([]);
   const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(0);
   const [filterStatus, setFilterStatus] = useState("all");
   const axiosSecure = useAxiosSecure();
+  const { role } = use(AuthContext);
 
   const fetchRequests = () => {
     axiosSecure
       .get(
-        `/my-request?page=${currentPage}&size=${itemsPerPage}&status=${filterStatus}`
+        `/all-requests?page=${currentPage}&size=${itemsPerPage}&status=${filterStatus}`
       )
       .then((res) => {
-        setMyRequests(res.data.result);
+        setRequests(res.data.result);
         setTotalRequest(res.data.totalRequest);
       });
   };
@@ -53,11 +56,11 @@ const MyRequest = () => {
         try {
           const res = await axiosSecure.delete(`/requests/${id}`);
           if (res.data.deletedCount > 0) {
-            Swal.fire("Deleted!", "Your request has been deleted.", "success");
+            Swal.fire("Deleted!", "Request has been deleted.", "success");
             fetchRequests();
           }
         } catch (err) {
-          Swal.fire("Failed to delete request.", err.massage);
+          Swal.fire("Failed to delete request.", err.message);
         }
       }
     });
@@ -72,10 +75,11 @@ const MyRequest = () => {
         <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <h1 className="text-3xl font-black text-gray-800">
-              My Donation <span className="text-red-600">Requests</span>
+              All Blood Donation <span className="text-red-600">Requests</span>
             </h1>
             <p className="text-gray-500 font-medium">
-              Manage your blood donation requests
+              Manage all user donation requests (
+              {role === "admin" ? "Admin" : "Volunteer"} View)
             </p>
           </div>
           <div className="flex items-center gap-3">
@@ -124,7 +128,7 @@ const MyRequest = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-50">
-                {myRequests.map((request) => (
+                {requests.map((request) => (
                   <tr
                     key={request._id}
                     className="hover:bg-red-50/20 transition-colors"
@@ -170,7 +174,7 @@ const MyRequest = () => {
                       </span>
                     </td>
                     <td className="p-6 text-xs">
-                      {request.status === "inprogress" ? (
+                      {request.status !== "pending" ? (
                         <div>
                           <p className="font-bold text-gray-700">
                             {request.donorName || "N/A"}
@@ -192,7 +196,7 @@ const MyRequest = () => {
                                 handleStatusUpdate(request._id, "done")
                               }
                               title="Done"
-                              className="p-2 text-green-500 hover:bg-green-50 rounded-lg transition-all"
+                              className="p-2 text-green-500 hover:bg-green-50 rounded-lg"
                             >
                               <FaCheck />
                             </button>
@@ -201,30 +205,34 @@ const MyRequest = () => {
                                 handleStatusUpdate(request._id, "canceled")
                               }
                               title="Cancel"
-                              className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-all"
+                              className="p-2 text-red-500 hover:bg-red-50 rounded-lg"
                             >
                               <FaTimes />
                             </button>
                           </>
                         )}
-                        <Link
-                          to={`/dashboard/update-request/${request._id}`}
-                          title="Edit"
-                          className="p-2 text-blue-500 hover:bg-blue-50 rounded-lg transition-all"
-                        >
-                          <FaEdit />
-                        </Link>
-                        <button
-                          onClick={() => handleDelete(request._id)}
-                          title="Delete"
-                          className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-all"
-                        >
-                          <FaTrash />
-                        </button>
+                        {role === "admin" && (
+                          <>
+                            <Link
+                              to={`/dashboard/update-request/${request._id}`}
+                              className="p-2 text-blue-500 hover:bg-blue-50 rounded-lg"
+                              title="Edit"
+                            >
+                              <FaEdit />
+                            </Link>
+                            <button
+                              onClick={() => handleDelete(request._id)}
+                              className="p-2 text-red-500 hover:bg-red-50 rounded-lg"
+                              title="Delete"
+                            >
+                              <FaTrash />
+                            </button>
+                          </>
+                        )}
                         <Link
                           to={`/donation-details/${request._id}`}
+                          className="p-2 text-gray-500 hover:bg-gray-50 rounded-lg"
                           title="View"
-                          className="p-2 text-gray-500 hover:bg-gray-50 rounded-lg transition-all"
                         >
                           <FaEye />
                         </Link>
@@ -271,4 +279,4 @@ const MyRequest = () => {
   );
 };
 
-export default MyRequest;
+export default AllRequest;
