@@ -12,6 +12,7 @@ import MyRequest from "../pages/Dashboard/MyRequest/MyRequest";
 import UpdateRequest from "../pages/Dashboard/UpdateRequest/UpdateRequest";
 import Profile from "../pages/Dashboard/Profile/Profile";
 import Search from "../pages/Dashboard/Search/Search";
+import DonationRequests from "../pages/DonationRequests/DonationRequests";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
       {
         path: "/search",
         Component: Search,
+      },
+      {
+        path: "/donation-requests",
+        Component: DonationRequests,
       },
     ],
   },
