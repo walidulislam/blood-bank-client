@@ -62,6 +62,36 @@ const Profile = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const handleUpdateProfile = async () => {
+    try {
+      const updatedInfo = {
+        displayName: formData.name,
+        district: formData.district,
+        upazila: formData.upazila,
+        blood: formData.bloodGroup,
+      };
+
+      const res = await axiosSecure.patch(
+        `/user/update/${user?.email}`,
+        updatedInfo
+      );
+
+      if (res.data.modifiedCount > 0) {
+        Swal.fire({
+          title: "Profile Updated! 🌸",
+          icon: "success",
+          timer: 1500,
+          showConfirmButton: false,
+        });
+        setIsEditable(false);
+      } else {
+        setIsEditable(false);
+      }
+    } catch (error) {
+      Swal.fire("Error", "Could not update profile", error.massage);
+    }
+  };
+
   if (loading)
     return (
       <div className="h-[97vh] flex items-center justify-center">
@@ -96,6 +126,7 @@ const Profile = () => {
               <FaTimes className="inline mr-2" /> Cancel
             </button>
             <button
+              onClick={handleUpdateProfile}
               className="px-8 py-4 bg-red-600 text-white rounded-2xl font-bold hover:bg-red-700 transition-all shadow-xl shadow-red-200"
             >
               <FaSave className="inline mr-2" /> Save Changes
