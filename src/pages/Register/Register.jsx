@@ -95,7 +95,7 @@ const Register = () => {
           updateProfileUser(displayName, photoURL)
             .then(() => {
               axios
-                .post("http://localhost:3000/users", formData)
+                .post("https://blood-donation-server-taupe.vercel.app/users", formData)
                 .then(() => {
                   setLoading(false);
                   toast.success("Registration Successful..🌸");

@@ -49,7 +49,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     if (!user) return;
-    axios.get(`http://localhost:3000/users/role/${user.email}`).then((res) => {
+    axios.get(`https://blood-donation-server-taupe.vercel.app/users/role/${user.email}`).then((res) => {
       setRole(res.data.role);
       setUserStatus(res.data.status);
       setRoleLoading(false);
