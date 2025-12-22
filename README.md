@@ -1,16 +1,56 @@
-# React + Vite
+# Blood Donation Application 🩸
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A complete *MERN Stack* blood donation platform that connects donors with people in urgent need of blood. Users can register as donors, create blood requests, donate, and help save lives.
 
-Currently, two official plugins are available:
+*Live Website*: [https://blood-bank-wesite.netlify.app/]
+*Client GitHub*: [https://github.com/walidulislam/blood-bank-client.git]
+*Server GitHub*: [https://github.com/walidulislam/blood-bank-server.git]
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+### Admin Credentials (For Evaluation)
+- *Email*: admin@gmail.com  
+- *Password*: Admin@123
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+### Key Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Full User Authentication (Register/Login with Email & Password)
+- Role-based Dashboard (Donor, Volunteer, Admin)
+- Create, Edit, Delete Blood Donation Requests
+- Public Blood Requests Page (Only Pending)
+- Private Request Details + "Donate Now" Modal
+- Status Change: pending → inprogress on donation
+- My Donation Requests with Pagination & Status Filter
+- Fully Responsive (Mobile + Desktop)
+- Stripe Payment Integration for Funding
+- Admin Panel: Block/Unblock Users, Change Roles
+- Secure API with Firebase Token Verification
+- Beautiful UI with DaisyUI + Tailwind CSS
+
+---
+
+### Technologies Used
+
+*Frontend*  
+- React.js, React Router  
+- Tailwind CSS + DaisyUI  
+- Axios, React Hot Toast  
+- Lottie React (Loading Animation)  
+- Firebase Authentication  
+
+*Backend*  
+- Node.js, Express.js  
+- MongoDB + Mongoose  
+- Firebase Admin SDK  
+- Stripe Payment Gateway  
+- Vercel Deployment  
+
+*Packages Used*  
+```json
+"dependencies": {
+  "axios", "react-hot-toast", "react-router-dom",
+  "firebase", "stripe", "lottie-react",
+  "sweetalert2", "react-icons", "daisyui"
+}
