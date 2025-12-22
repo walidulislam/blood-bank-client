@@ -11,6 +11,7 @@ import CreateRequest from "../pages/Dashboard/CreateRequest/CreateRequest";
 import MyRequest from "../pages/Dashboard/MyRequest/MyRequest";
 import UpdateRequest from "../pages/Dashboard/UpdateRequest/UpdateRequest";
 import Profile from "../pages/Dashboard/Profile/Profile";
+import Search from "../pages/Dashboard/Search/Search";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ export const router = createBrowserRouter([
       {
         path: "/register",
         Component: Register,
+      },
+      {
+        path: "/search",
+        Component: Search,
       },
     ],
   },
