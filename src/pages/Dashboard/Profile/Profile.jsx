@@ -15,7 +15,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 
 const Profile = () => {
-  const { user } = useContext(AuthContext);
+  const { user, role } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
   const [isEditable, setIsEditable] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -157,7 +157,7 @@ const Profile = () => {
               </h2>
               <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mt-2">
                 <span className="px-5 py-1.5 bg-red-600 text-white text-[10px] font-black rounded-full uppercase tracking-widest">
-                  Donor
+                  {role}
                 </span>
                 <span className="px-4 py-1.5 bg-gray-100 text-gray-500 text-[10px] font-black rounded-full uppercase border border-gray-200 flex items-center gap-1">
                   <FaIdBadge className="text-red-400" /> Verified Member
