@@ -10,6 +10,7 @@ import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import CreateRequest from "../pages/Dashboard/CreateRequest/CreateRequest";
 import MyRequest from "../pages/Dashboard/MyRequest/MyRequest";
 import UpdateRequest from "../pages/Dashboard/UpdateRequest/UpdateRequest";
+import Profile from "../pages/Dashboard/Profile/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ export const router = createBrowserRouter([
       {
         path: "update-request/:id",
         Component: UpdateRequest,
+      },
+      {
+        path: "profile",
+        Component: Profile,
       },
     ],
   },

@@ -50,7 +50,7 @@ const UpdateRequest = () => {
       requestMessage: form.message.value,
     };
 
-    axiosSecure.put(`/requests/${id}`, updatedInfo).then((res) => {
+    axiosSecure.patch(`/requests/${id}`, updatedInfo).then((res) => {
       if (res.data.modifiedCount > 0) {
         Swal.fire({
           title: "Update Successful..🌸",
